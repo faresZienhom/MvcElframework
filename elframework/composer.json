@@ -1,0 +1,29 @@
+{
+    "name": "phpanonymous/elframework",
+    "description": "framework",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Elframework\\": "framework/",
+            "Iliuminates\\": "ilIluminates/",
+            "Contracts\\": "Contracts/"
+
+
+        },
+        "files": [
+            "helpers/elframework_helpers.php"
+        ]
+
+
+    },
+    "authors": [
+        {
+            "name": "phpanonymous"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "version": "1.0.0"
+
+}
