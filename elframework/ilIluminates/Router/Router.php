@@ -2,6 +2,7 @@
 
 namespace Iliuminates\Router;
 
+use Iliuminates\Logs\Log;
 use Iliuminates\Middleware\Middleware;
 
 class Router
@@ -14,10 +15,9 @@ class Router
     {
         $route = self::applyGroupPrefix($route);
         $middleware = array_merge(static::getGroupMiddleware(), $middleware);
-
         self::$routes[] = [
             'method' => $method,
-            'uri' => $route == '/' ? $route : ltrim($route, '/'),
+            'uri' => $route,// == '/' ? $route : ltrim($route, '/'),
             'controller' => $controller,
             'action' => $action,
             'middleware' => $middleware,
@@ -36,7 +36,7 @@ class Router
     {
         if (isset(static::$groupAttributes['prefix'])) {
             $full_route = rtrim(static::$groupAttributes['prefix'], '/') . '/' . ltrim($route, '/');
-            return rtrim(ltrim($full_route, '/'), '/');
+            return rtrim($full_route,'/');
         } else {
             return $route;
         }
@@ -53,14 +53,14 @@ class Router
     // Dispatch the request and match the route
     public static function dispatch($uri, $method)
     {
-        // var_dump(static::$groupAttributes);
         $method = $_SERVER['REQUEST_METHOD'];
+        $method = strtoupper($method);
 
         $uri = rtrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
 
         $uri = str_replace('/mvcelframework/public', '', $uri);
-
         $uri = empty($uri) ? '/' : $uri;
+
 
         foreach (static::$routes as $route) {
 
@@ -103,7 +103,7 @@ class Router
             }
         }
 
-        throw new \Exception("This route {$uri} not found");
+        throw new Log ("This route {$uri} not found");
     }
 
 }

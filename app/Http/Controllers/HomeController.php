@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Iliuminates\Views\View;
+
 
 
 class HomeController 
@@ -9,7 +11,8 @@ class HomeController
     
 // Controller function for the home page
 function index() {
-    echo "Welcome to the Home Page!";
+    return View::make('index',['title'=>'index title','content'=>'test content']);
+
 }
 
 // Controller function for the about page

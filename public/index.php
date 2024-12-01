@@ -1,6 +1,6 @@
 <?php
 
-//  define('ROOT_PATH', value: dirname(__FILE__));
+  define('ROOT_PATH', value: dirname(__FILE__));
 
   define('ROOT_DIR', '/MvcElframework/public/');
 

@@ -15,21 +15,17 @@ class Application
         
         
         $this->router = new Route();
-        $uri = str_replace('/mvcelframework/public', '', $_SERVER['REQUEST_URI']);
-        $uri = explode('/', trim($uri, '/'));
-    
-        // التحقق إذا كان الطلب لـ API
-        if ($uri[0] === 'api') {
-            $this->apiRoute(); // تحميل مسارات API
+        if (Segment::get(0) === 'api') {
+            $this->apiRoute(); 
         } else {
-            $this->webRoute(); // تحميل مسارات Web
+            $this->webRoute(); 
         }
      }
     
     public function __destruct()
     {
         
-            $this->router->dispatch($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
+      $this->router->dispatch($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
             
     
     }

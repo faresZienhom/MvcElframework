@@ -39,7 +39,7 @@ class Middleware
         } elseif ($type == 'api' && isset(Core::$middlewareApiRoute[$key])) {
             return Core::$middlewareApiRoute[$key];
         } else {
-            throw new \Exception('This Middleware (' . $key . ') Not Found ');
+            throw new log('This Middleware (' . $key . ') Not Found ');
 
             
         }

@@ -17,10 +17,10 @@ class SimpleMiddleware implements Contract
 
         // var_dump(value: $role[0]);
 
-        // if(2 == 2){
-        //     header('Location: '.url('/about'));
-        //     exit;
-        // }
+        if(2 == 2){
+            header('Location: '.url('/about'));
+            exit;
+        }
 
         return $next($request);
 
