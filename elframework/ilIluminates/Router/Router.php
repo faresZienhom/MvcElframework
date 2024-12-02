@@ -60,8 +60,8 @@ class Router
 
         $uri = str_replace('/mvcelframework/public', '', $uri);
         $uri = empty($uri) ? '/' : $uri;
-
-
+// echo '<pre>';
+// var_dump(static::$routes);
         foreach (static::$routes as $route) {
 
             if ($method === $route['method']) {
@@ -73,8 +73,9 @@ class Router
                     $controller = $route['controller'];
                     if (is_object($controller)) {
 
-                        $route['middleware'] = $route['action'];
-                        $middlewareStack = $route['middleware'];
+                        $middlewareStack = !empty($route['action']) && !empty($route['middleware']) ?
+                            array_merge($route['middleware'], $route['action']) :
+                            $route['middleware'];
 
                         $next = function ($request) use ($controller, $params) {
                             return $controller(...$params);

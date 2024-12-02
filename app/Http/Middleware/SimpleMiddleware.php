@@ -2,6 +2,7 @@
 namespace App\Http\Middleware;
 
 use Contracts\Middleware\Contract;
+use Iliuminates\FrameworkSettings;
 
 class SimpleMiddleware implements Contract
 {
@@ -14,13 +15,13 @@ class SimpleMiddleware implements Contract
     public function handle($request, $next,...$role)
     {
 
-
+          FrameworkSettings::setLocale('es');
         // var_dump(value: $role[0]);
 
-        if(2 == 2){
-            header('Location: '.url('/about'));
-            exit;
-        }
+        // if(2 == 2){
+        //     header('Location: '.url('/about'));
+        //     exit;
+        // }
 
         return $next($request);
 
