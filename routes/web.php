@@ -12,6 +12,6 @@ use Iliuminates\Sessions\Session;
  Route::get('/article/{id}', HomeController::class, 'article');
 
  Route::get('/', function() {
-    return Session::get('locale');
+    return trans('channel');
 });
 

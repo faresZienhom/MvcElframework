@@ -1,4 +1,15 @@
 <?php
+
+
+if (!function_exists('trans')) {
+    function trans(string $trans = null, array|null $attriubtes = []): string|object
+    {
+
+        return
+            !empty($trans) ? \Iliuminates\Locales\Lang::get($trans, $attriubtes)
+            : new \Iliuminates\Locales\Lang;
+    }
+}
 if (!function_exists('view')) {
     function view(string $view, null|array $data = [])
     {
