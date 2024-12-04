@@ -6,12 +6,20 @@ use Iliuminates\Views\View;
 
 
 
-class HomeController 
+class HomeController extends Controller
 {
     
 // Controller function for the home page
 function index() {
-    return View::make('index',['title'=>'index title','content'=>'test content']);
+    $validation = $this->validate([
+        'user_id'=>$_GET['user_id']??'',
+   ], [
+        'user_id'=>['required','integer'],
+   ], [
+        'user_id'=>trans('main.user_id'),
+   ]);
+   echo "<pre>";
+   return var_dump($validation->validated());
 
 }
 

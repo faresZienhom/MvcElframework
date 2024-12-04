@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 
 use Iliuminates\Http\Controllers\BaseController;
 
-abstract class Controller  
+abstract class Controller  extends BaseController
 {
     
 }

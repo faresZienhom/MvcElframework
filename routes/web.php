@@ -5,13 +5,13 @@ use Iliuminates\Router\Route;
 use Iliuminates\Sessions\Session;
  
 
- //Route::get('/', HomeController::class,'index',);
+ Route::get('/', HomeController::class,'index',);
  
  
  Route::get('/about',HomeController::class,'about');
  Route::get('/article/{id}', HomeController::class, 'article');
 
- Route::get('/', function() {
-    return trans('channel');
-});
+//  Route::get('/', function() {
+//     return trans(trans: 'channel');
+// });
 
