@@ -18,11 +18,24 @@ function index() {
    ], [
         'user_id'=>trans('main.user_id'),
    ]);
-   echo "<pre>";
-   return var_dump($validation->validated());
-
+   //    return var_dump($validation->validated());
+   
+}
+public function data(){
+    return view('data'); 
 }
 
+public function data_post(){
+    echo "<pre>";
+    return var_dump(request());
+     
+    // $file = request()->file(name: 'file');
+    // $file->name(time());
+    // return $file->store('my/images');
+
+    //return Request::file('file')->store('data');
+    //return Request::file('file');
+}
 // Controller function for the about page
 function about() {
     echo "Welcome to the About Page!";

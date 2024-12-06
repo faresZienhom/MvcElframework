@@ -8,18 +8,17 @@ class Session
 
     public function __construct()
     {
-    
-
-        $handler = new SessionHandler(config('session.session_save_path'),
-        config('session.session_prefix'));
-        $handler->gc(config('session.expiration_timeout'));
         
-        session_set_save_handler($handler,true);
-        session_save_path(config('session.session_save_path'));
-        session_name(config('session.session_prefix'));
-        session_start([
-            'cookie_lifetime' => config('session.expiration_timeout')
-        ]);
+    }
+    
+    public static function start(){
+        if(session_status() === PHP_SESSION_NONE){
+            $handler = new SessionHandler(config('session.session_save_path'),config('session.session_prefix'));
+            $handler->gc(config('session.expiration_timeout'));
+            session_set_save_handler($handler,true);
+            session_name(config('session.session_prefix'));
+            session_start();
+        }
     }
     /**
      * @param string $key
@@ -29,6 +28,7 @@ class Session
      */
     public static function make(string $key, mixed $value = null): mixed
     {
+        static::start();
         if (!is_null($value)) {
             $_SESSION[$key] = Hash::encrypt($value);
         }
@@ -42,6 +42,7 @@ class Session
      */
     public static function get(string $key): mixed
     {
+        static::start();
         return isset($_SESSION[$key]) ? Hash::decrypt($_SESSION[$key]) : $key;
     }
 
@@ -53,6 +54,7 @@ class Session
      */
     public static function has(string $key): mixed
     {
+        static::start();
         return isset($_SESSION[$key]);
     }
 
@@ -65,6 +67,7 @@ class Session
      */
     public static function flash(string $key, mixed $value = null): mixed
     {
+        static::start();
         if (!is_null($value)) {
             $_SESSION[$key] = $value;
         }
@@ -80,6 +83,7 @@ class Session
      */
     public static function forget(string $key):void
     {
+        static::start();
         if (isset($_SESSION[$key])) {
             unset($_SESSION[$key]);
         }
@@ -91,8 +95,16 @@ class Session
      */
     public static function forget_all():void
     {
-        session_destroy();
+            static::start();
+            session_destroy();
     }
 
+    public function __destruct()
+    {
+        session_write_close();
+    }
+
+
+   
 
 }
